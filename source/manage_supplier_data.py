@@ -23,4 +23,4 @@ finally:
 # Export some data
 data[['RaisonSociale', 'lat', 'lon']].to_csv(os.path.join(get_data_dir(), 'umap.csv'), index=None, sep=';')
 data2 = data[~pd.isnull(data['lat'])]
-data2.to_csv(os.path.join(get_data_dir(), 'umap_filtered.csv'), index=None, sep=';')
+data2[['RaisonSociale', 'lat', 'lon']].to_csv(os.path.join(get_data_dir(), 'umap_filtered.csv'), index=None, sep=';')
