@@ -38,7 +38,7 @@ class AddressToCoords:
         return location.latitude, location.longitude
 
     def save_database(self):
-        self.database.to_csv(self.database_file, index=None, sep=';')
+        self.database.round(4).to_csv(self.database_file, index=None, sep=';')
 
     def get_coordinates(self, address):
         if 'Address' in self.database and address in self.database['Address'].values:
