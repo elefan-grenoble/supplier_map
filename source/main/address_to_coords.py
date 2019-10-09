@@ -1,6 +1,8 @@
 import pandas as pd
 import os
 import time
+
+from geopy.exc import GeocoderTimedOut
 from geopy.geocoders import Nominatim, BANFrance
 
 
@@ -25,10 +27,16 @@ class AddressToCoords:
 
     def get_online_coordinates(self, address):
         time.sleep(1.1)  # Respect the API condition
-        location = self.ban.geocode(address)
+        try:
+            location = self.ban.geocode(address)
+        except GeocoderTimedOut:
+            location = None
         print(f'Adress {address} sought with BAN')
         if location is None:
-            location = self.nominatim.geocode(address)
+            try:
+                location = self.nominatim.geocode(address)
+            except GeocoderTimedOut:
+                location = None
             print(f'Adress {address} sought with Nominatim')
             if location is None:
                 print(f'Adress not found for : {address}')
