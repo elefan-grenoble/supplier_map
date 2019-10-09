@@ -21,6 +21,10 @@ finally:
     addr2c.save_database()
 
 # Export some data
-data[['RaisonSociale', 'lat', 'lon']].to_csv(os.path.join(get_data_dir(), 'umap.csv'), index=None, sep=';')
+data[['RaisonSociale', 'lat', 'lon']].to_csv(os.path.join(get_data_dir(), 'umap.csv'), encoding='utf8',
+                                             index=None, sep=';')
+missing_coordinates_nb = pd.isnull(data['lat']).sum()
+print(f'{missing_coordinates_nb} suppliers with no coordinates')
 data2 = data[~pd.isnull(data['lat'])]
-data2[['RaisonSociale', 'lat', 'lon']].to_csv(os.path.join(get_data_dir(), 'umap_filtered.csv'), index=None, sep=';')
+data2[['RaisonSociale', 'lat', 'lon']].to_csv(os.path.join(get_data_dir(), 'umap_filtered.csv'), encoding='utf8',
+                                              index=None, sep=';')
