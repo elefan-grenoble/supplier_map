@@ -2,7 +2,7 @@ import os
 import pandas as pd
 from tqdm import tqdm
 
-from source.address_to_coords import AddressToCoords, get_data_dir
+from source.main.address_to_coords import AddressToCoords, get_data_dir
 
 # Read data
 data = pd.read_csv(os.path.join(get_data_dir(), 'supplier_table.csv'), encoding='iso-8859-1', sep=';')

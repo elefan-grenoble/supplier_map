@@ -7,14 +7,14 @@ from geopy.geocoders import Nominatim, BANFrance
 def get_data_dir():
     if os.path.exists('data'):
         return 'data'
-    if os.path.exists(os.path.join('..', 'data')):
-        return os.path.join('..', 'data')
+    if os.path.exists(os.path.join('..', '..', 'data')):
+        return os.path.join('..', '..', 'data')
     assert(False)
 
 
 class AddressToCoords:
     def __init__(self, database_file=os.path.join(get_data_dir(), 'address_to_coords.csv')):
-        self.nominatim = Nominatim()
+        self.nominatim = Nominatim(user_agent='supplier_map')
         self.ban = BANFrance()
         if os.path.exists(database_file):
             self.database_file = database_file
@@ -24,10 +24,12 @@ class AddressToCoords:
             self.database_file = database_file if database_file is not None else 'address_to_coords.csv'
 
     def get_online_coordinates(self, address):
-        time.sleep(1.1) # Respect the API condition
+        time.sleep(1.1)  # Respect the API condition
         location = self.ban.geocode(address)
+        print(f'Adress {address} sought with BAN')
         if location is None:
             location = self.nominatim.geocode(address)
+            print(f'Adress {address} sought with Nominatim')
             if location is None:
                 print(f'Adress not found for : {address}')
                 return None, None
