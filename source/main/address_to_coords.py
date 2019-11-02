@@ -25,13 +25,15 @@ class AddressToCoords:
             self.database = pd.DataFrame()
             self.database_file = database_file if database_file is not None else 'address_to_coords.csv'
 
-    def get_online_coordinates(self, address):
+    def get_online_coordinates(self, address, country='France'):
         time.sleep(1.1)  # Respect the API condition
-        try:
-            location = self.ban.geocode(address)
-        except GeocoderTimedOut:
-            location = None
-        print(f'Adress {address} sought with BAN')
+        location = None
+        if country == 'France':
+            try:
+                location = self.ban.geocode(address)
+            except GeocoderTimedOut:
+                location = None
+            print(f'Adress {address} sought with BAN')
         if location is None:
             try:
                 location = self.nominatim.geocode(address)
@@ -48,11 +50,11 @@ class AddressToCoords:
     def save_database(self):
         self.database.round(4).to_csv(self.database_file, index=None, sep=';')
 
-    def get_coordinates(self, address):
+    def get_coordinates(self, address, country):
         if 'Address' in self.database and address in self.database['Address'].values:
             idx = self.database[self.database['Address'] == address].index
             return self.database.loc[idx, 'lat'].values[0], self.database.loc[idx, 'lon'].values[0]
-        return self.get_online_coordinates(address)
+        return self.get_online_coordinates(address, country)
 
 
 if __name__ == '__main__':
