@@ -26,8 +26,11 @@ if __name__ == '__main__':
     try:
         for index, row in tqdm(data.iterrows(), total=len(data)):
             if not pd.isnull(row['Adresse 1']):
-                location = addr2c.get_coordinates(row['Adresse 1'] + ' ' + str(int(row['C.Postal'])) + ' ' + row['Ville'],
-                                                  row['Pays'])
+                address = row['Adresse 1']
+                if not pd.isnull(row['Adresse 2']):
+                    address += ' ' + row['Adresse 2']
+                address += ' ' + str(int(row['C.Postal'])) + ' ' + row['Ville']
+                location = addr2c.get_coordinates(address, row['Pays'])
                 data.loc[index, 'lat'] = location[0]
                 data.loc[index, 'lon'] = location[1]
     finally:
