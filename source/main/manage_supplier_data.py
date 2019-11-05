@@ -25,14 +25,15 @@ if __name__ == '__main__':
     data['lon'] = None
     try:
         for index, row in tqdm(data.iterrows(), total=len(data)):
-            if not pd.isnull(row['Adresse 1']):
-                address = row['Adresse 1']
-                if not pd.isnull(row['Adresse 2']):
-                    address += ' ' + row['Adresse 2']
-                address += ' ' + str(int(row['C.Postal'])) + ' ' + row['Ville']
-                location = addr2c.get_coordinates(address, row['Pays'])
-                data.loc[index, 'lat'] = location[0]
-                data.loc[index, 'lon'] = location[1]
+            address = row['Adresse 1'] if not pd.isnull(row['Adresse 1']) else row['RaisonSociale']
+            if not pd.isnull(row['Adresse 2']):
+                address += ' ' + row['Adresse 2']
+            if pd.isnull(row['C.Postal']):
+                continue
+            address += ' ' + str(int(row['C.Postal'])) + ' ' + row['Ville']
+            location = addr2c.get_coordinates(address, row['Pays'])
+            data.loc[index, 'lat'] = location[0]
+            data.loc[index, 'lon'] = location[1]
     finally:
         addr2c.save_database()
 
