@@ -1,5 +1,17 @@
+#PyCharm
 *.pyc
 .idea/
+
+# PyInstall
+build/
+dist/
+*.spec
+
+# Manual install
+*.zip
+supplier_map_v_*/
+
+# Data
 data/*
 !data/address_to_coords.csv
 !data/umap_filtered.csv
