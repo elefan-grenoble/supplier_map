@@ -17,7 +17,7 @@ if __name__ == '__main__':
     args = get_args()
 
     # Read data
-    data = pd.read_csv(os.path.join(get_data_dir(), args.filename), encoding='iso-8859-1', sep=';')
+    data = pd.read_csv(os.path.join(get_data_dir(), args.filename), encoding='cp1252', sep=';')
 
     # Add coordinates
     addr2c = AddressToCoords()
