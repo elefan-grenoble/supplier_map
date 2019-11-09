@@ -77,6 +77,9 @@ You should just update the *.exe* file in the archive of the release.
 ### Usage
 #### Windows
 
+For L'Éléfàn members, there is [a wiki page](https://wiki.lelefan.org/index.php?title=Produits/Carte_des_Producteurs_et_Fournisseurs) 
+written in French to explain usage and more.
+
 * Open *update_supplier_map.bat* with a text editor.
 * Replace *Table_fournisseurs_2019_10.csv* by the name of the file containing
 all the supplier data which is in the data directory.
