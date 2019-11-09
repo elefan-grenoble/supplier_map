@@ -1,2 +1,2 @@
-update_supplier_map.exe Table_fournisseurs_2019_10.csv
+manage_supplier_data.exe Table_fournisseurs_2019_10.csv
 pause
