@@ -68,6 +68,7 @@ pip install https://github.com/pyinstaller/pyinstaller/tarball/develop
 To generate an updated version of the .exe file, run the following command
 ````
 pyinstaller source/main/manage_supplier_data.py -F
+pyinstaller source/main/get_old_data.py -F
 ````
 
 The *.exe* file will be find in the dist directory.
@@ -106,6 +107,7 @@ Run the following command to know the parameters.
 
 ````
 python source/main/manage_supplier_data.py -h
+python source/main/get_old_data.py -h
 ````
 
 ## License

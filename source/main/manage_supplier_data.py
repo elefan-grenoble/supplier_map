@@ -28,10 +28,10 @@ if __name__ == '__main__':
             address = row['Adresse 1'] if not pd.isnull(row['Adresse 1']) else row['RaisonSociale']
             if not pd.isnull(row['Adresse 2']):
                 address += ' ' + row['Adresse 2']
-            if pd.isnull(row['C.Postal']):
+            if pd.isnull(row['C.Postal']) or int(row['C.Postal']) == 0:
                 continue
             address += ' ' + str(int(row['C.Postal'])) + ' ' + row['Ville']
-            location = addr2c.get_coordinates(address, row['Pays'])
+            location = addr2c.get_coordinates(address, 'France' if pd.isnull(row['Pays']) else row['Pays'])
             data.loc[index, 'lat'] = location[0]
             data.loc[index, 'lon'] = location[1]
     finally:
