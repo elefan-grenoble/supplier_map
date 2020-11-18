@@ -15,7 +15,7 @@
 
 #### Windows
 
-- [Download the archive containing an executable](https://github.com/elefan-grenoble/supplier_map/releases/download/v1.0.0/supplier_map_v_1_0_0.zip)
+- [Download the archive containing an executable](https://github.com/elefan-grenoble/supplier_map/releases/download/v1.1.0/supplier_map_v_1_1_0.zip)
 - Extract the archive
 
 #### Linux/Mac
